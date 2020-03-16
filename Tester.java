@@ -107,6 +107,9 @@ public class Tester {
                 System.out.print("\nService: ");
 
                 String service = scan.nextLine();
+                if (service != "Conference" & service != "Dinner" & service != "Lodging") {
+                    throw new UnknownServiceException("Unknown service.");
+                }
 
                 System.out.print("\nAmount: ");
 
