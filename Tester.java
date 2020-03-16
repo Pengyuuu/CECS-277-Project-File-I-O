@@ -9,6 +9,8 @@ public class Tester {
         ArrayList<Data> dataStrings = new ArrayList<>();
         ArrayList<Data> conferences = new ArrayList<>();
         ArrayList<Data> dinners = new ArrayList<>();
+        ArrayList<Data> lodges = new ArrayList<>();
+
 
 
         // reads the file
@@ -23,19 +25,25 @@ public class Tester {
 
         for (int i = 0; i < dataStrings.size(); i++){
 
-            if (dataStrings.get(i).getService() == "Conference") {
+            if (dataStrings.get(i).getService().equals("Conference")) {
                 conferences.add(dataStrings.get(i));
             }
-            else if (dataStrings.get(i).getService() == "Dinner") {
+            else if (dataStrings.get(i).getService().equals("Dinner")) {
                 dinners.add(dataStrings.get(i));
             }
+            else if (dataStrings.get(i).getService().equals("Lodging")) {
+                lodges.add(dataStrings.get(i));
+            }
+            else {
+                throw new UnknownServiceException("Unknown service.");
+
+            }
+
 
         }
         writeConference(conferences);
         writeDinner(dinners);
-
-
-
+        writeLodge(lodges);
 
         // if user wants to add data to the file, call the create function first and then the write function
         createData(dataStrings);
@@ -181,6 +189,30 @@ public class Tester {
             for (int i = 0; i < dinners.size(); i++){
 
                 write.println(dinners.get(i));
+
+            }
+
+            write.close();
+        }
+
+        catch (FileNotFoundException fnf){
+
+            System.out.println("File not found");
+        }
+    }
+
+    public static void writeLodge(ArrayList<Data> lodges){
+
+        Scanner scan = new Scanner(System.in);
+
+        try {
+
+            // Writes all the data from the arraylist into the file
+            PrintWriter write = new PrintWriter("lodging.txt");
+
+            for (int i = 0; i < lodges.size(); i++){
+
+                write.println(lodges.get(i));
 
             }
 
