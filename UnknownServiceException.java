@@ -9,6 +9,6 @@ public class UnknownServiceException extends IllegalArgumentException{
 
     @Override
     public String toString() {
-        return "Unknown service.";
+        return "Unknown service. It should be Conference, Dinner, or Lodging. ";
     }
 }

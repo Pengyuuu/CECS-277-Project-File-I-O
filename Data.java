@@ -2,19 +2,19 @@ public class Data {
 
     private String name;
     private String service;
-    private String amount;
+    private double amount;
     private String date;
 
     public Data(){
 
         name = "";
         service = "";
-        amount = "";
+        amount = 0;
         date = "";
 
     }
 
-    public Data(String n, String s, String a, String d){
+    public Data(String n, String s, double a, String d){
 
         name = n;
         service = s;
@@ -32,7 +32,7 @@ public class Data {
         return service;
     }
 
-    public String getAmount(){
+    public double getAmount(){
 
         return amount;
     }
@@ -52,7 +52,7 @@ public class Data {
         service = s;
     }
 
-    public void setAmount(String a){
+    public void setAmount(double a){
 
         amount = a;
     }

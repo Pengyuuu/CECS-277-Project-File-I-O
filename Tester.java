@@ -1,3 +1,4 @@
+import java.util.InputMismatchException;
 import java.util.Scanner;
 import java.io.*;
 import java.util.ArrayList;
@@ -12,7 +13,6 @@ public class Tester {
         ArrayList<Data> lodges = new ArrayList<>();
 
 
-
         // reads the file
         readFile(dataStrings);
 
@@ -24,21 +24,20 @@ public class Tester {
         }
 
         for (int i = 0; i < dataStrings.size(); i++){
-
-            if (dataStrings.get(i).getService().equals("Conference")) {
-                conferences.add(dataStrings.get(i));
+            try {
+                if (dataStrings.get(i).getService().equals("Conference")) {
+                    conferences.add(dataStrings.get(i));
+                } else if (dataStrings.get(i).getService().equals("Dinner")) {
+                    dinners.add(dataStrings.get(i));
+                } else if (dataStrings.get(i).getService().equals("Lodging")) {
+                    lodges.add(dataStrings.get(i));
+                } else {
+                    throw new UnknownServiceException();
+                }
             }
-            else if (dataStrings.get(i).getService().equals("Dinner")) {
-                dinners.add(dataStrings.get(i));
+            catch (UnknownServiceException e) {
+                System.out.println(e);
             }
-            else if (dataStrings.get(i).getService().equals("Lodging")) {
-                lodges.add(dataStrings.get(i));
-            }
-            else {
-                throw new UnknownServiceException("Unknown service.");
-
-            }
-
 
         }
         writeConference(conferences);
@@ -46,11 +45,17 @@ public class Tester {
         writeLodge(lodges);
 
         // if user wants to add data to the file, call the create function first and then the write function
-        createData(dataStrings);
+        try {
+            createData(dataStrings);
+        }
+        catch (BadDataException b) {
+            System.out.println(b.toString());
+        }
+        catch (UnknownServiceException e) {
+            System.out.println(e.toString());
+        }
+
         writeFile(dataStrings);
-
-
-
 
     }
 
@@ -65,7 +70,7 @@ public class Tester {
                 // Reads each line and puts it in it's respective category
                 String line = read.nextLine();
                 String [] tokens = line.split(";");
-                Data readLine = new Data(tokens[0], tokens[1], tokens[2], tokens[3]);
+                Data readLine = new Data(tokens[0], tokens[1], Double.parseDouble(tokens[2]), tokens[3]);
 
                 // Adds it to the arraylist
                 dataStrings.add(readLine);
@@ -98,35 +103,45 @@ public class Tester {
             String decision = scan.nextLine();
 
             // Creates data from user input
-            if (decision.equals("Y") || decision.equals("y")){
 
-                System.out.print("Name: ");
+                if (decision.equals("Y") || decision.equals("y")) {
 
-                String name = scan.nextLine();
+                    try {
+                        System.out.print("Name: ");
 
-                System.out.print("\nService: ");
+                        String name = scan.nextLine();
 
-                String service = scan.nextLine();
-                if (service != "Conference" & service != "Dinner" & service != "Lodging") {
-                    throw new UnknownServiceException("Unknown service.");
+                        System.out.print("\nService: ");
+
+                        String service = scan.nextLine();
+                        if (!service.equals("Conference") & !service.equals("Dinner") & !service.equals("Lodging")) {
+                            throw new UnknownServiceException();
+                        }
+
+                        System.out.print("\nAmount: ");
+
+                        double amount = Double.parseDouble(scan.nextLine());
+
+                        System.out.print("\nDate: ");
+
+                        String date = scan.nextLine();
+
+                        // Adds it to the existing arraylist
+                        dataStrings.add(new Data(name, service, amount, date));
+
+                    }
+                    catch (NumberFormatException b) {
+                        b = new BadDataException();
+                        System.out.println(b);
+                    }
+                    catch (UnknownServiceException e) {
+                        System.out.println("Unknown service.");
+                    }
+                }
+                else {
+                    write = false;
                 }
 
-                System.out.print("\nAmount: ");
-
-                String amount = scan.nextLine();
-
-                System.out.print("\nDate: ");
-
-                String date = scan.nextLine();
-
-                // Adds it to the existing arraylist
-                dataStrings.add(new Data(name, service, amount, date));
-            }
-
-            else {
-
-                write = false;
-            }
         }
 
         return dataStrings;
