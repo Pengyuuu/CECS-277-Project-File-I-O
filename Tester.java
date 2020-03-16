@@ -7,6 +7,9 @@ public class Tester {
 
         // Create arraylist to hold all data
         ArrayList<Data> dataStrings = new ArrayList<>();
+        ArrayList<Data> conferences = new ArrayList<>();
+        ArrayList<Data> dinners = new ArrayList<>();
+
 
         // reads the file
         readFile(dataStrings);
@@ -18,7 +21,29 @@ public class Tester {
             System.out.println(dataStrings.get(i));
         }
 
+        for (int i = 0; i < dataStrings.size(); i++){
+
+            if (dataStrings.get(i).getService() == "Conference") {
+                conferences.add(dataStrings.get(i));
+            }
+            else if (dataStrings.get(i).getService() == "Dinner") {
+                dinners.add(dataStrings.get(i));
+            }
+
+        }
+        writeConference(conferences);
+        writeDinner(dinners);
+
+
+
+
         // if user wants to add data to the file, call the create function first and then the write function
+        createData(dataStrings);
+        writeFile(dataStrings);
+
+
+
+
     }
 
     public static void readFile(ArrayList<Data> dataStrings){
@@ -108,6 +133,55 @@ public class Tester {
             for (int i = 0; i < dataStrings.size(); i++){
 
                 write.println(dataStrings.get(i));
+
+            }
+
+            write.close();
+        }
+
+        catch (FileNotFoundException fnf){
+
+            System.out.println("File not found");
+        }
+    }
+
+    public static void writeConference(ArrayList<Data> conferences){
+
+        Scanner scan = new Scanner(System.in);
+
+        try {
+
+            // Writes all the data from the arraylist into the file
+            PrintWriter write = new PrintWriter("conference.txt");
+
+            for (int i = 0; i < conferences.size(); i++){
+
+                write.println(conferences.get(i));
+
+            }
+
+            write.close();
+        }
+
+        catch (FileNotFoundException fnf){
+
+            System.out.println("File not found");
+        }
+    }
+
+    public static void writeDinner(ArrayList<Data> dinners){
+
+        Scanner scan = new Scanner(System.in);
+
+        try {
+
+            // Writes all the data from the arraylist into the file
+            PrintWriter write = new PrintWriter("dinner.txt");
+
+            for (int i = 0; i < dinners.size(); i++){
+
+                write.println(dinners.get(i));
+
             }
 
             write.close();
