@@ -1,3 +1,12 @@
+/**@authors Erina Lara, Eric Truong
+ * Date: March 16, 2020
+ * Purpose: Reads in data from a sales file and allows the user to add more data or organize them into their
+ * respective categories
+ * Input: Information to create more data
+ * Output: Sales, conference, dinners, or lodges file with data
+ *
+ */
+
 import java.util.InputMismatchException;
 import java.util.Scanner;
 import java.io.*;
