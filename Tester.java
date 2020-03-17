@@ -59,6 +59,10 @@ public class Tester {
 
     }
 
+    /**
+     * Reads data from the sales file
+     * @param dataStrings   arraylist to store data from file
+     */
     public static void readFile(ArrayList<Data> dataStrings){
 
         try {
@@ -89,6 +93,11 @@ public class Tester {
 
     }
 
+    /**
+     * Creates data to be written
+     * @param dataStrings   arraylist holding data
+     * @return              arraylist holding data
+     */
     public static ArrayList<Data> createData(ArrayList<Data> dataStrings){
 
         Scanner scan = new Scanner(System.in);
@@ -147,6 +156,10 @@ public class Tester {
         return dataStrings;
     }
 
+    /**
+     * Writes data to the sales file
+     * @param dataStrings   arraylist of data
+     */
     public static void writeFile(ArrayList<Data> dataStrings){
 
         Scanner scan = new Scanner(System.in);
@@ -171,6 +184,10 @@ public class Tester {
         }
     }
 
+    /**
+     * Writes data categorized as conference
+     * @param conferences   arraylist of data pertaining to conferences
+     */
     public static void writeConference(ArrayList<Data> conferences){
 
         Scanner scan = new Scanner(System.in);
@@ -195,6 +212,10 @@ public class Tester {
         }
     }
 
+    /**
+     * Writes data categorized as dinner
+     * @param dinners   arraylist of data pertaining to dinners
+     */
     public static void writeDinner(ArrayList<Data> dinners){
 
         Scanner scan = new Scanner(System.in);
@@ -219,6 +240,10 @@ public class Tester {
         }
     }
 
+    /**
+     * Writes data categorized as lodging
+     * @param lodges    arraylist of data pertaining to lodging
+     */
     public static void writeLodge(ArrayList<Data> lodges){
 
         Scanner scan = new Scanner(System.in);
