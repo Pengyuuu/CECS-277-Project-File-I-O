@@ -4,7 +4,6 @@
  * respective categories
  * Input: Information to create more data
  * Output: Sales, conference, dinners, or lodges file with data
- *
  */
 
 import java.util.InputMismatchException;
@@ -129,6 +128,13 @@ public class Tester {
 
                         String name = scan.nextLine();
 
+                        while (name.equals("")){
+
+                            System.out.print("Invalid input. Try again: ");
+
+                            name = scan.nextLine();
+                        }
+
                         System.out.print("\nService: ");
 
                         String service = scan.nextLine();
@@ -143,6 +149,13 @@ public class Tester {
                         System.out.print("\nDate: ");
 
                         String date = scan.nextLine();
+
+                        while (date.equals("")){
+
+                            System.out.print("Invalid input. Try again:  ");
+
+                            date = scan.nextLine();
+                        }
 
                         // Adds it to the existing arraylist
                         dataStrings.add(new Data(name, service, amount, date));
