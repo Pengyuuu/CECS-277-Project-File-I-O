@@ -114,7 +114,7 @@ public class Tester {
                         System.out.print("\nService: ");
 
                         String service = scan.nextLine();
-                        if (!service.equals("Conference") & !service.equals("Dinner") & !service.equals("Lodging")) {
+                        if (!service.equals("Conference") && !service.equals("Dinner") && !service.equals("Lodging")) {
                             throw new UnknownServiceException();
                         }
 
